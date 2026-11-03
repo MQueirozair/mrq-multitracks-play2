@@ -12,8 +12,6 @@ import GuideVoicePanel from './components/GuideVoicePanel';
 import MidiPanel from './components/MidiPanel';
 import SettingsModal from './components/SettingsModal';
 import MidiBridge from './components/MidiBridge';
-import InstrumentRack from './components/InstrumentRack';
-import InstrumentConverter from './components/InstrumentConverter';
 import HelpPanel from './components/HelpPanel';
 import TeleprompterOverlay from './components/TeleprompterOverlay';
 
@@ -56,11 +54,7 @@ export default function App() {
         {showSecondary && (nav === 'library' ? <LibraryPanel /> : <SetlistPanel />)}
         <div className="content-area">
           <div className="content-main">
-            {nav === 'rack' ? (
-              <InstrumentRack />
-            ) : nav === 'converter' ? (
-              <InstrumentConverter />
-            ) : nav === 'help' ? (
+            {nav === 'help' ? (
               <HelpPanel />
             ) : loadingSongTitle ? (
               <div className="empty-state">

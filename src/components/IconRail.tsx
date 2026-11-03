@@ -1,8 +1,11 @@
-import { Library, ListMusic, LayoutGrid, AudioWaveform, Timer, FileText, Volume2, Hash, Mic, Piano, Layers, Replace, Settings, HelpCircle } from 'lucide-react';
+import { Library, ListMusic, LayoutGrid, AudioWaveform, Timer, FileText, Volume2, Hash, Mic, Piano, Settings, HelpCircle } from 'lucide-react';
 import type { NavId } from '../state/useStore';
 import { useStore } from '../state/useStore';
-import { isTauriRuntime } from '../runtimeEnv';
 
+// Projeto separado "MRQ Multitracks Play2" (ver PROJETO-SEPARADO.md): os
+// itens de nav "rack" (Rack de instrumentos) e "converter" (Conversor de
+// instrumentos) foram removidos daqui de propósito — viraram os projetos
+// independentes mrq-rack-instrumentos e mrq-instrument-converter.
 const ITEMS: { id: NavId; icon: typeof Library; label: string }[] = [
   { id: 'library', icon: Library, label: 'Biblioteca' },
   { id: 'setlist', icon: ListMusic, label: 'Lista' },
@@ -14,25 +17,12 @@ const ITEMS: { id: NavId; icon: typeof Library; label: string }[] = [
   { id: 'key', icon: Hash, label: 'Tom' },
   { id: 'guide', icon: Mic, label: 'Voz guia' },
   { id: 'midi', icon: Piano, label: 'MIDI' },
-  { id: 'rack', icon: Layers, label: 'Rack de instrumentos' },
 ];
-
-// O MRQ Instrument Converter (import/exporta `.mrq`) só funciona dentro do
-// Tauri — ver tauriBridge.ts/mrqFormat.ts. No build Electron legado esse
-// item nem aparece, em vez de mostrar uma página que vai quebrar ao abrir o
-// seletor de arquivos (ver InstrumentConverter.tsx e o guard equivalente lá
-// como segunda camada de defesa).
-const CONVERTER_ITEM: { id: NavId; icon: typeof Library; label: string } = {
-  id: 'converter',
-  icon: Replace,
-  label: 'Conversor de instrumentos (.mrq)',
-};
-
 
 export default function IconRail({ onOpenSettings }: { onOpenSettings: () => void }) {
   const nav = useStore((s) => s.nav);
   const setNav = useStore((s) => s.setNav);
-  const items = isTauriRuntime() ? [...ITEMS, CONVERTER_ITEM] : ITEMS;
+  const items = ITEMS;
 
   return (
     <div className="rail">
