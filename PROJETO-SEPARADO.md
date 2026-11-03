@@ -80,3 +80,14 @@ Actions de cada repo gerar os instaladores reais (Windows/macOS/Linux) e
 testar cada um fisicamente. Depois que os 3 estiverem cada um 100%
 funcionando de forma independente, o usuário pediu pra planejarmos
 juntar os 3 de volta (como módulos/peças de um só produto, se der certo).
+
+## Nota de verificação (passagem adicional)
+
+Revisei este projeto depois do trim acima (feito numa execução anterior/
+paralela desta mesma tarefa) e confirmei que está tudo consistente:
+`tsc --noEmit` limpo, `vite build` limpo, `test:parts` e os testes de
+formato (SYX/NKI/EXS/MrqLayerVoice/SF2/Kontakt — ainda relevantes porque
+este app também carrega o Rack internamente via `src/audio/rack/`) todos
+passando. Só corrigi 2 referências esquecidas ao nome do repositório
+original no caminho legado do Electron (`package.json` >
+`build.publish.repo` e `electron/main.ts` > `UPDATE_REPO_NAME`).
